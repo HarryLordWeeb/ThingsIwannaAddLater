@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head> 
+<body>
+
+    <button onclick="totalclick()" id="play">Play</button>
+    <button onclick="stopPlaying()" id="pause">Stop</button>
+    <button onclick="pause()">Pause</button>
+    <button onclick="prevSong()" id="prev">Previous</button>
+    <button onclick="nextSong()" id="next">Next</button>
+
+    <script>
+        let album = ["burkan.mp3", "sudno.mp3"]
+        let i = 0;
+        let audio= new Audio();
+        let resume = 0;
+
+        function pause(){
+            audio.pause();
+            resume = audio.currentTime
+            return resume;
+        }
+        function prevSong(){
+            i--
+            resume = 0;
+            if(i < 0) {i = (album.length - 1 )}
+            audio.src= album[i]
+            audio.play()
+            return i;
+        }
+        function nextSong(){
+            i++
+            resume = 0;
+            if(i >= album.length) {i = 0}
+            audio.src= album[i]
+            audio.play()
+            return i;
+        }
+        function totalclick(){
+            audio.src= album[i]
+            audio.currentTime =  resume;
+            audio.play()
+            }
+        function stopPlaying(){
+            audio.pause();
+            audio.src= album[i]
+            resume = 0;
+        }
+
+    </script> 
+</body>
+</html>
